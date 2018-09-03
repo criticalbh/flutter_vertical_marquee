@@ -89,14 +89,13 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     }
 
     if (textList.length == 1) {
-      return Center(
-        child: Text(
-          textList[0],
-          style: TextStyle(
-            fontSize: widget.fontSize,
-            color: widget.textColor,
-          ),
+      return Text(
+        textList[0],
+        style: TextStyle(
+          fontSize: widget.fontSize,
+          color: widget.textColor,
         ),
+        textAlign: TextAlign.left,
       );
     }
 
@@ -152,7 +151,7 @@ class _MarqueePainter extends CustomPainter {
     this.current,
   });
 
-  TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr, textAlign: TextAlign.center);
+  TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr, textAlign: TextAlign.left);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -169,7 +168,7 @@ class _MarqueePainter extends CustomPainter {
         color: textColor,
       ),
     );
-    textPainter.textAlign = TextAlign.center;
+    textPainter.textAlign = TextAlign.left;
     textPainter.maxLines = 1;
     textPainter.ellipsis = "...";
 
@@ -186,7 +185,7 @@ class _MarqueePainter extends CustomPainter {
         color: textColor,
       ),
     );
-    textPainter.textAlign = TextAlign.center;
+    textPainter.textAlign = TextAlign.left;
     textPainter.maxLines = 1;
     textPainter.ellipsis = "...";
 
@@ -200,7 +199,7 @@ class _MarqueePainter extends CustomPainter {
       width = size.width;
     }
     var height = textPainter.height;
-    var dx = size.width / 2 - width / 2;
+    var dx = 1.0;
     var dy = size.height / 2 - height / 2 - size.height * percent;
     if (isNext) {
       dy = dy + size.height;
